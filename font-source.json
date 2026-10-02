@@ -1,0 +1,9 @@
+{
+  "font": "Microsoft Sans Serif",
+  "installed_file": "~/.local/share/fonts/classic98/micross.ttf",
+  "method": "Extract i386/micross.tt_ then micross.ttf from Microsoft XP SP3 package, without executing it.",
+  "recipe": "https://github.com/Winetricks/winetricks/blob/master/src/winetricks",
+  "source": "http://www.download.windowsupdate.com/msdownload/update/software/dflt/2008/04/windowsxp-kb936929-sp3-x86-enu_c81472f7eeea2eca421e116cd4c03e2300ebfde4.exe",
+  "archive_sha256": "62e524a552db9f6fd22d469010ea4d7e28ee06fa615a1c34362129f808916654",
+  "font_sha256": "b0bc5a7f8a531339a6ed86742624d179bdc7279c49a9f8a3643234c0d7e9e0f1"
+}

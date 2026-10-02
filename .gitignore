@@ -1,0 +1,6 @@
+node_modules/
+dist/
+__pycache__/
+backups/
+native-titlebar/hyprbars/*.so
+native-titlebar/backups/

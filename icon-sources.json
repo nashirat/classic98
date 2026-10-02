@@ -1,0 +1,122 @@
+{
+  "project": "Chicago95",
+  "commit": "e89583c9a0fbc5022d099fbe6f12132a756027a8",
+  "homepage": "https://github.com/grassmunk/Chicago95",
+  "icons": [
+    {
+      "file": "audio-volume-high.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/audio-volume-high.png",
+      "original": "Icons/Chicago95/panel/16/audio-volume-high.png"
+    },
+    {
+      "file": "audio-volume-medium.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/audio-volume-medium.png",
+      "original": "Icons/Chicago95/panel/16/audio-volume-medium.png"
+    },
+    {
+      "file": "audio-volume-low.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/audio-volume-low.png",
+      "original": "Icons/Chicago95/panel/16/audio-volume-low.png"
+    },
+    {
+      "file": "audio-volume-muted.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/audio-volume-low-zero.png",
+      "original": "Icons/Chicago95/panel/16/audio-volume-muted.png"
+    },
+    {
+      "file": "network-idle.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/network-idle.png",
+      "original": "Icons/Chicago95/panel/16/network-idle.png"
+    },
+    {
+      "file": "network-offline.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/network-offline.png",
+      "original": "Icons/Chicago95/panel/16/network-offline.png"
+    },
+    {
+      "file": "bluetooth-active.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/bluetooth-active.png",
+      "original": "Icons/Chicago95/panel/16/bluetooth-active.png"
+    },
+    {
+      "file": "bluetooth-disabled.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/bluetooth-disabled.png",
+      "original": "Icons/Chicago95/panel/16/bluetooth-disabled.png"
+    },
+    {
+      "file": "battery-000.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-000.png",
+      "original": "Icons/Chicago95/panel/16/battery-000.png"
+    },
+    {
+      "file": "battery-000-charging.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-000-charging.png",
+      "original": "Icons/Chicago95/panel/16/battery-000-charging.png"
+    },
+    {
+      "file": "battery-020.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-low.png",
+      "original": "Icons/Chicago95/panel/16/battery-020.png"
+    },
+    {
+      "file": "battery-020-charging.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-020-charging.png",
+      "original": "Icons/Chicago95/panel/16/battery-020-charging.png"
+    },
+    {
+      "file": "battery-040.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-low.png",
+      "original": "Icons/Chicago95/panel/16/battery-040.png"
+    },
+    {
+      "file": "battery-040-charging.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-040-charging.png",
+      "original": "Icons/Chicago95/panel/16/battery-040-charging.png"
+    },
+    {
+      "file": "battery-060.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-good.png",
+      "original": "Icons/Chicago95/panel/16/battery-060.png"
+    },
+    {
+      "file": "battery-060-charging.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-060-charging.png",
+      "original": "Icons/Chicago95/panel/16/battery-060-charging.png"
+    },
+    {
+      "file": "battery-080.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-good.png",
+      "original": "Icons/Chicago95/panel/16/battery-080.png"
+    },
+    {
+      "file": "battery-080-charging.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-080-charging.png",
+      "original": "Icons/Chicago95/panel/16/battery-080-charging.png"
+    },
+    {
+      "file": "battery-100.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-full.png",
+      "original": "Icons/Chicago95/panel/16/battery-100.png"
+    },
+    {
+      "file": "battery-100-charging.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/panel/16/battery-100-charging.png",
+      "original": "Icons/Chicago95/panel/16/battery-100-charging.png"
+    },
+    {
+      "file": "display.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/devices/16/video-display.png",
+      "original": "Icons/Chicago95/devices/16/video-display.png"
+    },
+    {
+      "file": "computer.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Icons/Chicago95/devices/16/computer.png",
+      "original": "Icons/Chicago95/devices/16/computer.png"
+    },
+    {
+      "file": "windows-start.png",
+      "source": "https://raw.githubusercontent.com/grassmunk/Chicago95/e89583c9a0fbc5022d099fbe6f12132a756027a8/Theme/Chicago95/misc/windows_16x16px.png",
+      "original": "Theme/Chicago95/misc/windows_16x16px.png"
+    }
+  ]
+}

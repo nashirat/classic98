@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "nash.quick-icons",
+  "name": "Classic 98 Icons",
+  "version": "1.0.0",
+  "author": "nash",
+  "description": "Internet Explorer, email, Paint, and phone icons beside Start",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "QuickIcons.qml"
+  },
+  "barWidget": {
+    "displayName": "Classic 98 Icons",
+    "description": "Four classic icons",
+    "category": "Apps",
+    "allowMultiple": false
+  }
+}

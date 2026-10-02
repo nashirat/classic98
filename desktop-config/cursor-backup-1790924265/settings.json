@@ -1,0 +1,12 @@
+{
+  "paths": [
+    "/home/nash/.config/hypr/hyprland.lua",
+    "/home/nash/.config/hypr/classic98-cursors.lua",
+    "/home/nash/.config/uwsm/env",
+    "/home/nash/.local/share/icons/default/index.theme"
+  ],
+  "gsettings": {
+    "cursor-theme": "'default'",
+    "cursor-size": "24"
+  }
+}

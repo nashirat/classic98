@@ -1,0 +1,67 @@
+{
+  "bar": {
+    "centerAnchor": "nash.workspaces",
+    "layout": {
+      "center": [
+        {
+          "id": "nash.workspaces"
+        }
+      ],
+      "left": [
+        {
+          "id": "nash.menu"
+        },
+        {
+          "id": "nash.quick-icons"
+        }
+      ],
+      "right": [
+        {
+          "id": "omarchy.tray"
+        },
+        {
+          "id": "nash.bluetooth"
+        },
+        {
+          "id": "nash.network"
+        },
+        {
+          "id": "nash.audio"
+        },
+        {
+          "id": "nash.monitor"
+        },
+        {
+          "id": "nash.power"
+        },
+        {
+          "format": "h:mm AP",
+          "formatAlt": "ddd d MMM HH:mm",
+          "id": "nash.clock",
+          "verticalFormat": "HH\n—\nmm"
+        }
+      ]
+    },
+    "position": "bottom",
+    "transparent": true,
+    "id": "nash.bar"
+  },
+  "idle": {
+    "lock": 300,
+    "screensaver": 150
+  },
+  "plugins": [
+    {
+      "id": "nash.osd"
+    }
+  ],
+  "version": 1,
+  "disabledPlugins": [
+    "omarchy.menu",
+    "omarchy.osd"
+  ],
+  "cloneSourceRestores": [
+    "nash.menu",
+    "nash.osd"
+  ]
+}

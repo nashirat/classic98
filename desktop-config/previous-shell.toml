@@ -1,0 +1,11 @@
+[font]
+base-size = 14
+
+[popups]
+border-width = 0
+
+[tooltip]
+border-width = 0
+
+[notifications]
+border-width = 0

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="260">
+    <defs><linearGradient id="title"><stop stop-color="#000080"/><stop offset="1" stop-color="#164bdc"/></linearGradient></defs>
+    <rect width="640" height="260" fill="#c0c0c0"/>
+    <path d="M0 259V0H639" stroke="white" stroke-width="2" fill="none"/>
+    <path d="M639 1V259H1" stroke="#000000" stroke-width="2" fill="none"/>
+    <path d="M637 3V257H3" stroke="#808080" stroke-width="2" fill="none"/>
+    <rect x="5" y="5" width="630" height="34" fill="url(#title)"/>
+    <g font-family="Microsoft Sans Serif" font-size="18" fill="black">
+    <text x="14" y="29" fill="white" font-weight="bold">Unlock computer</text>
+    <text x="28" y="82">Enter your disk password to start Omarchy.</text>
+    <text x="28" y="115" font-size="16">Password:</text></g>
+    <rect x="28" y="140" width="584" height="44" fill="white"/>
+    <path d="M28 183V140H611" fill="none" stroke="#808080" stroke-width="2"/>
+    <path d="M30 181V142H609" fill="none" stroke="black" stroke-width="2"/>
+    <path d="M612 140V184H28" fill="none" stroke="white" stroke-width="2"/>
+    <path d="M28 206H612" stroke="#808080"/><path d="M28 207H612" stroke="white"/>
+    </svg>

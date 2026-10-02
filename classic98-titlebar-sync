@@ -1,0 +1,13 @@
+#!/bin/bash
+set -euo pipefail
+classic_plugin=/home/nash/Work/classic98-theme/native-titlebar/hyprbars/hyprbars.so
+classic_theme=${1:-$(cat "$HOME/.local/state/omarchy/current/theme.name")}
+loaded=$(hyprctl plugin list)
+if [[ $classic_theme == classic98 ]]; then
+  if [[ $loaded != *"Plugin hyprbars"* ]]; then
+    hyprctl plugin load "$classic_plugin"
+  fi
+elif [[ $loaded == *"Plugin hyprbars"* ]]; then
+  hyprctl plugin unload "$classic_plugin"
+fi
+hyprctl reload >/dev/null

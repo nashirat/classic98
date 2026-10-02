@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+classic_state=/home/nash/Work/classic98-theme/desktop-config
+restart_classic_shell=0
+if [[ ${1:-} == classic98 ]]; then
+  cp "$classic_state/classic-shell.json" "$HOME/.config/omarchy/shell.json"
+  cp "$classic_state/classic-shell.toml" "$HOME/.config/omarchy/shell.toml"
+  touch "$classic_state/active"
+  restart_classic_shell=1
+elif [[ -f "$classic_state/active" ]]; then
+  cp "$classic_state/previous-shell.json" "$HOME/.config/omarchy/shell.json"
+  cp "$classic_state/previous-shell.toml" "$HOME/.config/omarchy/shell.toml"
+  rm "$classic_state/active"
+  restart_classic_shell=1
+fi
+/home/nash/Work/classic98-theme/classic98-titlebar-sync "${1:-}"
+# Replacement-bar hot reload can leave callbacks bound to the discarded bar.
+# Start a fresh shell after the new config is fully written.
+if (( restart_classic_shell )); then omarchy restart shell; fi

@@ -1,0 +1,90 @@
+# Presentation only; Plymouth continues to handle authentication and input.
+Window.SetBackgroundTopColor(0, 0.502, 0.502);
+Window.SetBackgroundBottomColor(0, 0.502, 0.502);
+mode = Plymouth.GetMode();
+unlock_image = Image("unlock.png");
+boot_image = Image("boot.png");
+shutdown_image = Image("shutdown.png");
+card = Sprite();
+x = Window.GetWidth() / 2 - 320;
+y = Window.GetHeight() / 2 - 130;
+card.SetPosition(x, y, 1);
+bullet_image = Image("bullet.png");
+progress_image = Image("progress.png");
+bullets = [];
+blocks = [];
+for (i = 0; i < 48; i++) {
+    blocks[i] = Sprite(progress_image);
+    blocks[i].SetPosition(x + 33 + i * 12, y + 145, 2);
+    blocks[i].SetOpacity(0);
+}
+message = Sprite();
+message.SetPosition(x + 28, y + 222, 3);
+answer = Sprite();
+answer.SetPosition(x + 44, y + 152, 3);
+
+fun clear_input() {
+    for (i = 0; bullets[i]; i++) bullets[i].SetOpacity(0);
+    answer.SetOpacity(0);
+}
+fun hide_progress() {
+    for (i = 0; i < 48; i++) blocks[i].SetOpacity(0);
+}
+fun display_normal() {
+    global.asking = 0;
+    clear_input();
+    if (mode == "shutdown") card.SetImage(shutdown_image);
+    else card.SetImage(boot_image);
+}
+fun display_password(prompt, count) {
+    global.asking = 1;
+    card.SetImage(unlock_image);
+    hide_progress();
+    clear_input();
+    if (count > 46) count = 46;
+    for (i = 0; i < count; i++) {
+        if (!bullets[i]) {
+            bullets[i] = Sprite(bullet_image);
+            bullets[i].SetPosition(x + 44 + i * 12, y + 158, 3);
+        }
+        bullets[i].SetOpacity(1);
+    }
+}
+fun display_question(prompt, text) {
+    global.asking = 1;
+    card.SetImage(unlock_image);
+    hide_progress();
+    clear_input();
+    answer.SetImage(Image.Text(text, 0, 0, 0));
+    answer.SetOpacity(1);
+    message.SetImage(Image.Text(prompt, 0, 0, 0));
+    message.SetOpacity(1);
+}
+fun progress_callback(duration, progress) {
+    if (global.asking) return;
+    count = Math.Int(progress * 48);
+    if (count < 0) count = 0;
+    if (count > 48) count = 48;
+    for (i = 0; i < 48; i++) blocks[i].SetOpacity(i < count);
+}
+fun refresh_callback() {
+    if (mode != "shutdown" || global.asking) return;
+    global.tick++;
+    offset = Math.Int(global.tick / 4) % 48;
+    for (i = 0; i < 48; i++) blocks[i].SetOpacity(i >= offset && i < offset + 6);
+}
+fun display_message(text) {
+    message.SetImage(Image.Text(text, 0, 0, 0));
+    message.SetOpacity(1);
+}
+fun hide_message(text) { message.SetOpacity(0); }
+global.asking = 0;
+global.tick = 0;
+display_normal();
+Plymouth.SetDisplayNormalFunction(display_normal);
+Plymouth.SetDisplayPasswordFunction(display_password);
+Plymouth.SetDisplayQuestionFunction(display_question);
+Plymouth.SetBootProgressFunction(progress_callback);
+Plymouth.SetRefreshFunction(refresh_callback);
+Plymouth.SetDisplayMessageFunction(display_message);
+Plymouth.SetHideMessageFunction(hide_message);

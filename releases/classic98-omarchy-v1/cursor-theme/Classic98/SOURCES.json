@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/grassmunk/Chicago95",
+  "commit": "5da19b8b1e2a886ebf6628403023d5fac3acc3ee",
+  "variants": [
+    "Cursors/Chicago95_Animated_Hourglass_Cursors/cursors",
+    "Cursors/Chicago95_Animated_Hourglass_Cursors_HiDPI/cursors"
+  ],
+  "adaptation": "Combine original 32 and 64 px Xcursor frames; preserve pixels, hotspots and delays."
+}

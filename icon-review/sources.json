@@ -1,0 +1,93 @@
+{
+  "collection": "alexh/vintage-icons",
+  "homepage": "https://github.com/alexh/vintage-icons",
+  "commit": "cff2143b10cb1a1ab4062355ad0dde21b7a6fab3",
+  "icons": [
+    {
+      "file": "variants/msie1_0.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/msie1_0.png",
+      "sha256": "e7e62bf493bb8c26001f0e3502d7ae12849e0d5eac3a79124d1712af1ce1fd25"
+    },
+    {
+      "file": "variants/msie1_1.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/msie1_1.png",
+      "sha256": "32361b4a593a57ca6a1ce9901eaf977a248e7ec0f363f7da6211b800a97aeef9"
+    },
+    {
+      "file": "variants/msie1_2.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/msie1_2.png",
+      "sha256": "3cf3d5f41a86500223b4e4c696e389890d1086235aae888c45c4ed021a64dbc9"
+    },
+    {
+      "file": "variants/msie1_3.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/msie1_3.png",
+      "sha256": "9352a3c31f13c76a2c8617887b5f70b82a19e4ba0c208411045d56735908aa46"
+    },
+    {
+      "file": "variants/msie1_4.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/msie1_4.png",
+      "sha256": "8c4f9a869a791cf3f498afd384546caacca3c5609fa08ae1f8f26c1528078fcb"
+    },
+    {
+      "file": "variants/msie1_5.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/msie1_5.png",
+      "sha256": "1b99d33a1d6ccd2d9ad019b72a877372afefa1284361e298cdc12fe8a395fe38"
+    },
+    {
+      "file": "variants/outlook_express_0.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/outlook_express_0.png",
+      "sha256": "45d022ae8c47948d84bfaefd556ffc07fafe9b8cbd0bdc0fb0b54109e8c918aa"
+    },
+    {
+      "file": "variants/outlook_express_1.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/outlook_express_1.png",
+      "sha256": "ceb449fff42e53e452cd9b906edd177f14aa3d6ae8fca8838844d0a5136b594c"
+    },
+    {
+      "file": "variants/outlook_express_2.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/outlook_express_2.png",
+      "sha256": "47892f2a2b7025576b508bb155e176ad253e67f1afa095179c20b31e96725a72"
+    },
+    {
+      "file": "variants/envelope_closed_0.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/envelope_closed_0.png",
+      "sha256": "3c52c56ab2d1221dfd15079b416ae5099de3a0df9f47206234d3a1c09a3e3a08"
+    },
+    {
+      "file": "variants/envelope_closed_1.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/envelope_closed_1.png",
+      "sha256": "018a4970f695c195e3c852ff302704b931e0f58e8c17b9d550eedac92a9fc5bf"
+    },
+    {
+      "file": "variants/paint_old_0.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/paint_old_0.png",
+      "sha256": "ecf0420050cf3870c503442c3a3aa44b2b80803ec637f181cd6fe70b3e185702"
+    },
+    {
+      "file": "variants/paint_old_1.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/paint_old_1.png",
+      "sha256": "873374d07fe240835b5e0629908d89375027c63733578320028c26c794db0c69"
+    },
+    {
+      "file": "variants/conn_dialup_recbin_phone.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/conn_dialup_recbin_phone.png",
+      "sha256": "1ea9d780a88d677680a137ea2ac5a008c89c88a488467549d2374657c803e9f8"
+    },
+    {
+      "file": "variants/world_phonereceiver.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/world_phonereceiver.png",
+      "sha256": "dfb87b3d98a2b4f2754b2018ebe900147d26c48951f2d2a0100cff3ab305360a"
+    },
+    {
+      "file": "variants/write_card_phone.png",
+      "source": "https://raw.githubusercontent.com/alexh/vintage-icons/cff2143b10cb1a1ab4062355ad0dde21b7a6fab3/static/icons/write_card_phone.png",
+      "sha256": "89552b41c179b69e6a661c03f50a89ee17ef185bd9b3ba376fc3f11d75077608"
+    }
+  ],
+  "selected": {
+    "internet-explorer.png": "variants/msie1_1.png",
+    "email.png": "variants/envelope_closed_0.png",
+    "paint.png": "variants/paint_old_0.png",
+    "phone.png": "variants/world_phonereceiver.png"
+  }
+}

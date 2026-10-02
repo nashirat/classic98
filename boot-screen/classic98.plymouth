@@ -1,0 +1,11 @@
+[Plymouth Theme]
+Name=Classic 98
+Description=Silver Classic98 dialogs for disk unlock, boot and shutdown.
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/classic98
+ScriptFile=/usr/share/plymouth/themes/classic98/classic98.script
+ConsoleLogBackgroundColor=0x008080
+Font=Sans 12
+MonospaceFont=Monospace 12

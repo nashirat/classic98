@@ -1,0 +1,2 @@
+#!/bin/bash
+exec /home/nash/Work/classic98-theme/classic98-titlebar-sync
