@@ -640,7 +640,7 @@ void CHyprBar::renderPass(PHLMONITOR pMonitor, const float& a) {
         m_hourglassTimer->updateTimeout(busy ? std::optional<Time::steady_dur>(std::chrono::milliseconds(50)) : std::nullopt);
     }
     if (busy && !m_hourglassTimer->armed()) m_hourglassTimer->updateTimeout(std::chrono::milliseconds(50));
-    const auto displayTitle = busy ? title.text : PWINDOW->m_title;
+    const auto displayTitle = (busy || !title.busy) ? title.text : PWINDOW->m_title;
     if (ENABLETITLE && (m_szLastTitle != displayTitle || busyChanged || m_bWindowSizeChanged || !m_pTextTex || m_pTextTex->m_texID == 0 || m_bTitleColorChanged)) {
         m_szLastTitle = displayTitle;
         renderBarTitle(BARBUF, pMonitor->m_scale);

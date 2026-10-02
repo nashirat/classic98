@@ -13,6 +13,11 @@ int main(int argc, char** argv) {
   assert(!agentTitle("google-chrome", "⠋ Task | Project").busy);
   assert(!agentTitle("org.omarchy.agent", "Work").busy);
   assert(!agentTitle("org.omarchy.agent", "⠋Work").busy);
+  { auto t = agentTitle("foot", "◑ Theme installation"); assert(t.busy && t.text == "Theme installation"); }
+  assert(!agentTitle("foot", "◑Work").busy);
+  assert(!agentTitle("google-chrome", "◑ Work").busy);
+  { auto t = agentTitle("foot", "✳ Idle"); assert(!t.busy && t.text == "Idle"); }
+  assert(agentTitle("google-chrome", "✳ Idle").text == "✳ Idle");
   auto a = loadHourglass(argv[1]);
   assert(a.frames.size() > 1 && a.durationMs > 0 && a.width > 0 && a.height > 0);
   assert(a.frameAt(0) == 0 && a.frameAt(a.durationMs) == 0);

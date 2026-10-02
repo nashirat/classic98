@@ -4,7 +4,7 @@ hl.config({
     border_size = 4,
     gaps_in = 6,
     gaps_out = 12,
-    col = { active_border = "rgb(c0c0c0)", inactive_border = "rgb(808080)" },
+    col = { active_border = "rgb(e4e4e4)", inactive_border = "rgb(a0a0a0)" },
   },
   decoration = {
     rounding = 0,
@@ -16,7 +16,7 @@ hl.config({
     shadow = { enabled = true, range = 6, render_power = 3, color = "rgba(00000066)", offset = { 2, 3 } },
   },
   group = {
-    col = { border_active = "rgb(c0c0c0)", border_inactive = "rgb(808080)" },
+    col = { border_active = "rgb(e4e4e4)", border_inactive = "rgb(a0a0a0)" },
     groupbar = { text_color = "rgb(ffffff)", text_color_inactive = "rgb(000000)",
       col = { active = "rgb(000080)", inactive = "rgb(c0c0c0)" } },
   },

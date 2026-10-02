@@ -22,6 +22,13 @@ inline Title agentTitle(const std::string& app, const std::string& title) {
         static_cast<unsigned char>(title[1]) >= 0xa0 && static_cast<unsigned char>(title[1]) <= 0xa3 &&
         static_cast<unsigned char>(title[2]) >= 0x80 && static_cast<unsigned char>(title[2]) <= 0xbf && title[3] == ' ')
         return {title.substr(4), true};
+    // Claude Code in foot spins U+25D0..U+25D3 (◐◓◑◒) while working.
+    if (app == "foot" && title.size() > 4 && static_cast<unsigned char>(title[0]) == 0xe2 &&
+        static_cast<unsigned char>(title[1]) == 0x97 && static_cast<unsigned char>(title[2]) >= 0x90 &&
+        static_cast<unsigned char>(title[2]) <= 0x93 && title[3] == ' ')
+        return {title.substr(4), true};
+    // Claude Code marks an idle session with "✳ " (U+2733); hide it.
+    if (app == "foot" && title.rfind("\u2733 ", 0) == 0) return {title.substr(4), false};
     return {title, false};
 }
 
