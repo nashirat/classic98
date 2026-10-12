@@ -359,6 +359,27 @@ size_t CHyprBar::getVisibleButtonCount(Config::INTEGER barButtonPadding, Config:
     return count;
 }
 
+struct SButtonArt {
+    std::array<std::string_view, 14> rows;
+    uint64_t                         color;
+};
+
+static SButtonArt buttonArt(const std::string& icon, bool focused) {
+    if (!focused)
+        return {{"", "", "", "", "    ##", "     ##"}, 0xffffffff};
+    if (icon == "_")
+        return {{"##############", "#............#", "#............#", "#............#", "#............#", "#............#", "#............#",
+                 "#...######...#", "#...######...#", "#............#", "#............#", "#............#", "#............#", "##############"},
+                0xff000000};
+    if (icon == "□")
+        return {{"##############", "#............#", "#............#", "#..########..#", "#..#......#..#", "#..#......#..#", "#..#......#..#",
+                 "#..#####..#..#", "#..#...#..#..#", "#..#...#..#..#", "#..########..#", "#............#", "#............#", "##############"},
+                0xff000000};
+    return {{"##############", "#............#", "#............#", "#............#", "#...#....#...#", "#....#..#....#", "#.....##.....#",
+             "#.....##.....#", "#....#..#....#", "#...#....#...#", "#............#", "#............#", "#............#", "##############"},
+            0xff000000};
+}
+
 void CHyprBar::renderBarButtons(CBox* barBox, const float scale, const float a) {
     const auto BARBUTTONPADDING = g_pGlobalState->config.barButtonPadding->value();
     const auto BARPADDING       = g_pGlobalState->config.barPadding->value();
@@ -368,6 +389,7 @@ void CHyprBar::renderBarButtons(CBox* barBox, const float scale, const float a) 
     const bool BUTTONSRIGHT    = ALIGNBUTTONS != "left";
     const auto visibleCount    = getVisibleButtonCount(BARBUTTONPADDING, BARPADDING, Vector2D{barBox->w, barBox->h}, scale);
     const bool INVALIDATEICONS = m_bButtonsDirty || m_bWindowSizeChanged;
+    const auto PWINDOW         = m_pWindow.lock();
 
     int        offset = BARPADDING * scale;
     for (size_t i = 0; i < visibleCount; ++i) {
@@ -389,44 +411,19 @@ void CHyprBar::renderBarButtons(CBox* barBox, const float scale, const float a) 
                           scaledButtonSize};
         buttonBox.round();
 
-        // Classic 98: square silver button, two-pixel raised bevel.
-        g_pHyprOpenGL->renderRect(buttonBox, color, {.round = 0});
+        // Classic 98 (fvwm3 look): focused windows get 14x14 outlined glyphs,
+        // unfocused windows only a small tick. Pixel art is scaled by whole pixels.
+        (void)color;
         const double pixel = std::max(1.0f, std::round(scale));
-        const auto edge = [&](double x, double y, double w, double h, uint64_t rgb) {
-            CBox box{x, y, w, h};
-            CHyprColor edgeColor{rgb};
-            edgeColor.a *= a;
-            g_pHyprOpenGL->renderRect(box, edgeColor, {.round = 0});
-        };
-        edge(buttonBox.x, buttonBox.y, buttonBox.w, pixel, 0xffffffff);
-        edge(buttonBox.x, buttonBox.y, pixel, buttonBox.h, 0xffffffff);
-        edge(buttonBox.x, buttonBox.y + buttonBox.h - pixel, buttonBox.w, pixel, 0xff000000);
-        edge(buttonBox.x + buttonBox.w - pixel, buttonBox.y, pixel, buttonBox.h, 0xff000000);
-        edge(buttonBox.x + pixel, buttonBox.y + pixel, buttonBox.w - 2 * pixel, pixel, 0xffdfdfdf);
-        edge(buttonBox.x + pixel, buttonBox.y + pixel, pixel, buttonBox.h - 2 * pixel, 0xffdfdfdf);
-        edge(buttonBox.x + pixel, buttonBox.y + buttonBox.h - 2 * pixel, buttonBox.w - 2 * pixel, pixel, 0xff808080);
-        edge(buttonBox.x + buttonBox.w - 2 * pixel, buttonBox.y + pixel, pixel, buttonBox.h - 2 * pixel, 0xff808080);
-
-        if (button.icon == "□") {
-            // Draw classic maximize/restore glyphs from pixels rather than a font.
-            const bool maximized = Fullscreen::controller()->isFullscreen(m_pWindow.lock(), Fullscreen::FSMODE_MAXIMIZED);
-            const double unit = std::max(1.0f, std::round(scale));
-            const double size = std::round((maximized ? 8 : 10) * scale);
-            const double shift = maximized ? std::round(3 * scale) : 0;
-            const double x = std::round(buttonBox.x + (buttonBox.w - size - shift) / 2);
-            const double y = std::round(buttonBox.y + (buttonBox.h - size - shift) / 2);
-            const auto square = [&](double sx, double sy) {
-                edge(sx, sy, size, size, 0xff000000);
-                CBox inside{sx + unit, sy + 2 * unit, size - 2 * unit, size - 3 * unit};
-                g_pHyprOpenGL->renderRect(inside, color, {.round = 0});
-            };
-            if (maximized)
-                square(x + shift, y);
-            square(x, y + shift);
-        } else if (button.icon == "_") {
-            edge(std::round(buttonBox.x + (buttonBox.w - 8 * scale) / 2),
-                 std::round(buttonBox.y + buttonBox.h * 0.68), std::round(8 * scale), std::max(1.0f, std::round(2 * scale)), 0xff000000);
-        }
+        const auto   art   = buttonArt(button.icon, PWINDOW == Desktop::focusState()->window());
+        const double x0    = std::round(buttonBox.x + (buttonBox.w - 14 * pixel) / 2);
+        const double y0    = std::round(buttonBox.y + (buttonBox.h - 14 * pixel) / 2);
+        CHyprColor   fg{art.color};
+        fg.a *= a;
+        for (size_t row = 0; row < art.rows.size(); ++row)
+            for (size_t col = 0; col < art.rows[row].size(); ++col)
+                if (art.rows[row][col] == '#')
+                    g_pHyprOpenGL->renderRect(CBox{x0 + col * pixel, y0 + row * pixel, pixel, pixel}, fg, {.round = 0});
 
         offset += scaledButtonsPad + scaledButtonSize;
     }
@@ -451,7 +448,7 @@ void CHyprBar::renderBarButtonsText(CBox* barBox, const float scale, const float
         const auto scaledButtonSize = button.size * scale;
         const auto scaledButtonsPad = BARBUTTONPADDING * scale;
 
-        if (button.icon == "□" || button.icon == "_") {
+        if (button.icon == "□" || button.icon == "_" || button.icon == "×") {
             offset += scaledButtonsPad + scaledButtonSize;
             noScaleOffset += BARBUTTONPADDING + button.size;
             continue;

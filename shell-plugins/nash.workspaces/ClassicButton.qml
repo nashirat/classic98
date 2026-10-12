@@ -86,7 +86,7 @@ Item {
     anchors.margins: 3
     anchors.topMargin: 5
     anchors.bottomMargin: 5
-    color: root.sunken ? "#dfdfdf" : "#c0c0c0"
+    color: root.sunken ? "#444444" : "#4d4d4d"
     Image {
       visible: root.sunken
       anchors.fill: parent

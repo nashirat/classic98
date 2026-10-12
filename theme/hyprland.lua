@@ -28,17 +28,15 @@ o.window(".*", { opacity = "1.0 override 1.0 override 1.0 override", no_blur = t
 if hl.plugin.hyprbars ~= nil then
   hl.config({ plugin = { hyprbars = {
     enabled = true,
-    bar_height = 26,
-    bar_color = "rgb(000080)",
-    bar_gradient = true,
-    bar_gradient_color = "rgb(164bdc)",
-    inactive_gradient_color = "rgb(b5b5b5)",
+    bar_height = 20,
+    bar_color = "rgb(8f9f8f)",
+    bar_gradient = false,
     bar_blur = false,
-    col = { text = "rgb(ffffff)" },
+    col = { text = "rgb(000000)" },
     bar_text_size = 12,
     bar_text_weight = "bold",
     bar_text_font = "Microsoft Sans Serif",
-    bar_text_align = "left",
+    bar_text_align = "center",
     bar_part_of_window = true,
     bar_precedence_over_border = true,
     bar_padding = 4,
@@ -46,22 +44,25 @@ if hl.plugin.hyprbars ~= nil then
     inactive_button_color = "rgb(c0c0c0)",
     on_double_click = [[hyprctl dispatch 'hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" })']],
   } } })
+  -- The fvwm-style beveled frame (borders-plus-plus fork) replaces the flat border.
+  -- ponytail: assumes it loads alongside hyprbars; it has no Lua table to check.
+  hl.config({ general = { border_size = 0 } })
   hl.plugin.hyprbars.add_button({
-    bg_color = "rgb(c0c0c0)", fg_color = "rgb(000000)", size = 20,
+    bg_color = "rgb(c0c0c0)", fg_color = "rgb(000000)", size = 14,
     icon = "×", action = "hyprctl dispatch 'hl.dsp.window.close()'",
   })
   hl.plugin.hyprbars.add_button({
-    bg_color = "rgb(c0c0c0)", fg_color = "rgb(000000)", size = 20,
+    bg_color = "rgb(c0c0c0)", fg_color = "rgb(000000)", size = 14,
     icon = "□",
     action = [[hyprctl dispatch 'hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" })']],
   })
   hl.plugin.hyprbars.add_button({
-    bg_color = "rgb(c0c0c0)", fg_color = "rgb(000000)", size = 20,
+    bg_color = "rgb(c0c0c0)", fg_color = "rgb(000000)", size = 14,
     icon = "_",
     action = [[hyprctl dispatch 'hl.dsp.window.move({ workspace = "special:scratchpad", follow = false })']],
   })
   o.window({ focus = false }, {
-    ["hyprbars:bar_color"] = "rgb(808080)",
-    ["hyprbars:title_color"] = "rgb(c0c0c0)",
+    ["hyprbars:bar_color"] = "rgb(003c3c)",
+    ["hyprbars:title_color"] = "rgb(ffffff)",
   })
 end

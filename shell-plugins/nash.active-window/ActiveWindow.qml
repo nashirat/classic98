@@ -24,7 +24,7 @@ BarWidget {
   Rectangle {
     visible: Color.pick("classic98.enabled", "false") === "true"
     anchors.fill: parent; anchors.margins: 3
-    color: "#dfdfdf"
+    color: "#444444"
     ClassicBevel { anchors.fill: parent; sunken: true }
   }
   Item {

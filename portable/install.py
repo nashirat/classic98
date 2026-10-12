@@ -82,17 +82,33 @@ def apply_shell():
     write_text(shell_paths()[1], '[font]\nbase-size = 12\n')
 
 
+# Title bars, then the beveled frame that replaces Hyprland's flat border.
+PLUGINS = ('hyprbars', 'borders-plus-plus')
+
+
+def plugin_path(name):
+    return DATA / f'native-titlebar/{name}/{name}.so'
+
+
+def unload_plugins():
+    loaded = run('hyprctl', 'plugin', 'list')
+    for name in PLUGINS:
+        if f'Plugin {name}' in loaded:
+            run('hyprctl', 'plugin', 'unload', str(plugin_path(name)))
+
+
 def decorations(theme):
-    plugin = DATA / 'native-titlebar/hyprbars/hyprbars.so'
-    loaded = 'Plugin hyprbars' in run('hyprctl', 'plugin', 'list')
-    if theme == 'classic98' and plugin.exists():
+    if theme == 'classic98' and plugin_path('hyprbars').exists():
         if PIN not in run('hyprctl', 'version'):
             print('Classic 98: title bars skipped; rebuild for the updated Hyprland version.', file=sys.stderr)
-        elif not loaded:
-            run('hyprctl', 'plugin', 'load', str(plugin))
-            (STATE / 'plugin-loaded').touch()
-    elif loaded and (STATE / 'plugin-loaded').exists():
-        run('hyprctl', 'plugin', 'unload', str(plugin))
+        else:
+            loaded = run('hyprctl', 'plugin', 'list')
+            for name in PLUGINS:
+                if plugin_path(name).exists() and f'Plugin {name}' not in loaded:
+                    run('hyprctl', 'plugin', 'load', str(plugin_path(name)))
+                    (STATE / 'plugin-loaded').touch()
+    elif (STATE / 'plugin-loaded').exists():
+        unload_plugins()
         (STATE / 'plugin-loaded').unlink()
     run('hyprctl', 'reload')
     errors = run('hyprctl', 'configerrors')
@@ -164,8 +180,9 @@ def install(args):
         if not shutil.which('fc-cache'):
             raise RuntimeError('fc-cache is required when installing a font.')
     if not args.without_titlebars:
-        run('make', '-B', '-C', str(ROOT / 'native-titlebar/hyprbars'), 'CXX=c++',
-            'CXXFLAGS=-O2 -fno-gnu-unique -shared -fPIC -std=c++2b -Wno-narrowing', 'EXTRA_FLAGS=')
+        for name in PLUGINS:
+            run('make', '-B', '-C', str(ROOT / 'native-titlebar' / name), 'CXX=c++',
+                'CXXFLAGS=-O2 -fno-gnu-unique -shared -fPIC -std=c++2b -Wno-narrowing', 'EXTRA_FLAGS=')
     previous = {'theme': theme_name(), 'cursor': cursor_settings()}
     if previous['theme'] == 'classic98':
         raise RuntimeError('Select another theme before installing Classic 98.')
@@ -181,7 +198,8 @@ def install(args):
     try:
         shutil.copytree(ROOT, DATA, ignore=shutil.ignore_patterns('__pycache__', 'tests', '.git'))
         if args.without_titlebars:
-            (DATA / 'native-titlebar/hyprbars/hyprbars.so').unlink(missing_ok=True)
+            for name in PLUGINS:
+                plugin_path(name).unlink(missing_ok=True)
         for source, target in destinations():
             target.parent.mkdir(parents=True, exist_ok=True)
             owned = json.loads((STATE / 'owned.json').read_text())
@@ -237,9 +255,8 @@ def uninstall():
     if not (STATE / 'previous.json').exists():
         raise RuntimeError('No installation backup found.')
     previous = json.loads((STATE / 'previous.json').read_text())
-    plugin = DATA / 'native-titlebar/hyprbars/hyprbars.so'
-    if (STATE / 'plugin-loaded').exists() and 'Plugin hyprbars' in run('hyprctl', 'plugin', 'list'):
-        run('hyprctl', 'plugin', 'unload', str(plugin))
+    if (STATE / 'plugin-loaded').exists():
+        unload_plugins()
     restore(STATE / 'backup')
     if (STATE / 'owned.json').exists():
         for name in json.loads((STATE / 'owned.json').read_text()):

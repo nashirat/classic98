@@ -62,6 +62,16 @@ APICALL EXPORT PLUGIN_DESCRIPTION_INFO PLUGIN_INIT(HANDLE handle) {
     HyprlandAPI::reloadConfig();
 
     static auto P = Event::bus()->m_events.window.open.listen([&](PHLWINDOW w) { onNewWindow(w); });
+    // Focus decides frame and title bar colors, but Hyprland only repaints part of the
+    // decorations on focus change. Repaint the old and new focused windows in full.
+    static PHLWINDOWREF lastFocused;
+    static auto         P2 = Event::bus()->m_events.window.active.listen([&](PHLWINDOW w, Desktop::eFocusReason) {
+        if (const auto OLD = lastFocused.lock())
+            g_pHyprRenderer->damageWindow(OLD, true);
+        if (w)
+            g_pHyprRenderer->damageWindow(w, true);
+        lastFocused = w;
+    });
 
     // add deco to existing windows
     for (auto& w : Desktop::windowState()->windows()) {

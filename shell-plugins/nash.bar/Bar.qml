@@ -1268,15 +1268,15 @@ Item {
     WlrLayershell.namespace: "omarchy-bar"
     WlrLayershell.layer: WlrLayer.Top
 
-    // Classic taskbar raised top seam; widgets retain all stock behavior.
+    // Raised top seam matching the active window frame's outer edge (dark, then light).
     Rectangle {
       visible: Color.pick("classic98.enabled", "false") === "true"
       anchors.top: parent.top
-      width: parent.width; height: 1; color: "#dfdfdf"; z: 100
+      width: parent.width; height: 1; color: "#202020"; z: 100
     }
     Rectangle {
       visible: Color.pick("classic98.enabled", "false") === "true"
-      y: 1; width: parent.width; height: 1; color: "#ffffff"; z: 100
+      y: 1; width: parent.width; height: 1; color: "#676767"; z: 100
     }
 
     Loader {
@@ -1545,7 +1545,7 @@ Item {
       z: -1
       anchors.fill: parent
       anchors.topMargin: 5; anchors.bottomMargin: 5
-      color: "#c0c0c0"
+      color: "#4d4d4d"
       ClassicBevel { anchors.fill: parent; sunken: true; shallow: true }
     }
   }

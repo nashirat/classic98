@@ -21,8 +21,9 @@ native.mkdir()
 for name in ('LICENSE', 'CLASSIC98.md'):
     shutil.copy2(ROOT / 'native-titlebar' / name, native / name)
 shutil.copytree(ROOT / 'native-titlebar/assets', native / 'assets')
-shutil.copytree(ROOT / 'native-titlebar/hyprbars', native / 'hyprbars',
-                ignore=shutil.ignore_patterns('*.so', '*.o', 'build', '.git'))
+for name in ('hyprbars', 'borders-plus-plus'):
+    shutil.copytree(ROOT / 'native-titlebar' / name, native / name,
+                    ignore=shutil.ignore_patterns('*.so', '*.o', 'build', '.git'))
 sources = STAGE / 'sources'
 sources.mkdir()
 for name in ('icon-sources.json', 'font-source.json'):
