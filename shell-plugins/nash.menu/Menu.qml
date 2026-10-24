@@ -3,7 +3,9 @@ import Quickshell.Io
 import Quickshell.Wayland
 import QtQuick
 import qs.Commons
+import qs.Commons as Commons
 import qs.Ui
+import qs.services as OmarchyServices
 import "MenuModel.js" as MenuModel
 
 Item {
@@ -77,27 +79,35 @@ Item {
 
   // Shared application engine (entries, hidden filters, icons, launch,
   // removal), owned by the shell and also used by the standalone launcher.
-  readonly property var appLibrary: root.shell ? root.shell.appLibrary : null
+  // ponytail: omarchy 4.0.4 hands cloned menus a null appLibrary (Array.isArray
+  // fails on the registry's manifest.kinds), so fall back to a local one. Drop
+  // the Loader once the shell injects it.
+  readonly property var appLibrary: root.shell && root.shell.appLibrary ? root.shell.appLibrary : localAppLibrary.item
+  Loader {
+    id: localAppLibrary
+    active: !(root.shell && root.shell.appLibrary)
+    sourceComponent: OmarchyServices.AppLibrary { }
+  }
   property bool deleteConfirmOpen: false
   property var deleteTarget: null
   onOpenedChanged: if (!opened) { deleteConfirmOpen = false; deleteTarget = null }
-  // Bound to the central [menu] section in shell.toml via Color.qml.
+  // Bound to the central [menu] section in shell.toml via Commons.Color.qml.
   // Each color already includes its alpha companion (composed in the
   // singleton), so consumers can drop them straight into a Rectangle.
-  property color background: Color.menu.background
-  property color foreground: Color.menu.text
-  property color border: Color.menu.border
+  property color background: Commons.Color.menu.background
+  property color foreground: Commons.Color.menu.text
+  property color border: Commons.Color.menu.border
   property var borderSpec: Border.surfaceSpec("menu", "border", border, Math.max(1, Style.space(2)))
-  property color scrim: Color.menu.scrim
-  property color selectedBackground: Color.menu.selectedBackground
-  property color selectedText: Color.menu.selectedText
-  property color selectedBorder: Color.menu.selectedBorder
+  property color scrim: Commons.Color.menu.scrim
+  property color selectedBackground: Commons.Color.menu.selectedBackground
+  property color selectedText: Commons.Color.menu.selectedText
+  property color selectedBorder: Commons.Color.menu.selectedBorder
   property var selectedBorderSpec: Border.surfaceSpec("menu", "selected-border", selectedBorder, 0)
   readonly property real rowReservedBorderLeft: Border.left(selectedBorderSpec)
   readonly property real rowReservedBorderRight: Border.right(selectedBorderSpec)
   readonly property int cornerRadius: Style.cornerRadius
   property int contentMargin: Style.spacing.panelPadding
-  readonly property int classicTitleHeight: Color.pick("classic98.enabled", "false") === "true" ? 26 : 0
+  readonly property int classicTitleHeight: Commons.Color.pick("classic98.enabled", "false") === "true" ? 20 : 0
   property int headerHeight: Math.max(Style.space(34), Style.font.title + Style.spacing.controlPaddingY * 2)
   property int contentSpacing: Style.spacing.md
   property int baseRowHeight: Math.max(Style.space(50), Style.font.body + Style.spacing.rowPaddingX * 2)
@@ -1072,21 +1082,48 @@ Item {
         y: card.borderTop
         width: card.width - card.borderLeft - card.borderRight
         height: root.classicTitleHeight
-        gradient: Gradient {
-          orientation: Gradient.Horizontal
-          GradientStop { position: 0; color: "#000080" }
-          GradientStop { position: 1; color: "#164bdc" }
-        }
+        color: "#8f9f8f"
         Text {
-          anchors.left: parent.left
-          anchors.leftMargin: 4
-          anchors.verticalCenter: parent.verticalCenter
+          anchors.centerIn: parent
           text: "Menu"
-          color: "#ffffff"
+          color: "#000000"
           font.family: "Microsoft Sans Serif"
           font.pixelSize: 12
           font.bold: true
           renderType: Text.NativeRendering
+        }
+      }
+
+      // fvwm-style frame painted over the 7 px card border, matching the focused
+      // window frame: 1 px rings outer to inner, top/left vs bottom/right colors.
+      Repeater {
+        model: root.classicTitleHeight > 0 ? 7 : 0
+        Item {
+          readonly property color tl: ["#202020", "#676767", "#676767", "#4d4d4d", "#4d4d4d", "#4d4d4d", "#202020"][index]
+          readonly property color br: ["#202020", "#202020", "#4d4d4d", "#4d4d4d", "#4d4d4d", "#676767", "#202020"][index]
+          x: index; y: index; z: 50
+          width: card.width - index * 2; height: card.height - index * 2
+          Rectangle { width: parent.width - 1; height: 1; color: parent.tl }
+          Rectangle { y: 1; width: 1; height: parent.height - 2; color: parent.tl }
+          Rectangle { x: 1; y: parent.height - 1; width: parent.width - 1; height: 1; color: parent.br }
+          Rectangle { x: parent.width - 1; width: 1; height: parent.height - 1; color: parent.br }
+        }
+      }
+      // Corner grooves (2 px dark, 1 px light) 27 px from each corner, like the window frame.
+      Repeater {
+        model: root.classicTitleHeight > 0 ? 2 : 0
+        Item {
+          readonly property int gx: index === 0 ? 27 : card.width - 30
+          readonly property int gy: index === 0 ? 27 : card.height - 30
+          z: 51
+          Rectangle { x: parent.gx; y: 1; width: 2; height: 5; color: "#202020" }
+          Rectangle { x: parent.gx + 2; y: 1; width: 1; height: 5; color: "#676767" }
+          Rectangle { x: parent.gx; y: card.height - 6; width: 2; height: 5; color: "#202020" }
+          Rectangle { x: parent.gx + 2; y: card.height - 6; width: 1; height: 5; color: "#676767" }
+          Rectangle { x: 1; y: parent.gy; width: 5; height: 2; color: "#202020" }
+          Rectangle { x: 1; y: parent.gy + 2; width: 5; height: 1; color: "#676767" }
+          Rectangle { x: card.width - 6; y: parent.gy; width: 5; height: 2; color: "#202020" }
+          Rectangle { x: card.width - 6; y: parent.gy + 2; width: 5; height: 1; color: "#676767" }
         }
       }
 
@@ -1319,7 +1356,7 @@ Item {
                   width: parent.width
                   text: row.detail
                   visible: (root.filterText || row.kind === "dmenu") && row.detail.length > 0
-                  color: root.foreground
+                  color: row.hasCursor ? root.selectedText : root.foreground
                   opacity: 0.52
                   font.family: root.fontFamily
                   font.pixelSize: Style.font.bodySmall

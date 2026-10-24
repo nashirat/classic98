@@ -6,6 +6,7 @@ import Quickshell.Bluetooth
 import Quickshell.Services.Pipewire
 import qs.Ui
 import qs.Commons
+import qs.Commons as Commons
 import "Model.js" as Model
 
 Panel {
@@ -104,10 +105,10 @@ Panel {
   readonly property string toggleHint: root.adapter && root.adapter.enabled ? "Turn Bluetooth off" : "Turn Bluetooth on"
 
   readonly property color hoverFill: bar
-    ? Style.hoverFillFor(bar.foreground, Color.accent)
+    ? Style.hoverFillFor(bar.foreground, Commons.Color.accent)
     : "transparent"
   readonly property color selectedFill: bar
-    ? Style.selectedFillFor(bar.foreground, Color.accent)
+    ? Style.selectedFillFor(bar.foreground, Commons.Color.accent)
     : "transparent"
 
   function sectionCount(section) {
@@ -664,7 +665,7 @@ Panel {
 
   BarIconButton {
     id: button
-    readonly property bool classic98: Color.pick("classic98.enabled", "false") === "true"
+    readonly property bool classic98: Commons.Color.pick("classic98.enabled", "false") === "true"
     iconComponent: classic98 ? classicPixelIcon : null
     opticalSize: classic98 ? 20 : Style.bar.iconCanvas
     slotSize: classic98 ? 26 : Style.bar.iconSlot

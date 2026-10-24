@@ -2,6 +2,7 @@ import QtQuick
 import Quickshell
 import Quickshell.Wayland
 import qs.Commons
+import qs.Commons as Commons
 import qs.Ui
 
 BarWidget {
@@ -22,7 +23,7 @@ BarWidget {
   }
 
   Rectangle {
-    visible: Color.pick("classic98.enabled", "false") === "true"
+    visible: Commons.Color.pick("classic98.enabled", "false") === "true"
     anchors.fill: parent; anchors.margins: 3
     color: "#444444"
     ClassicBevel { anchors.fill: parent; sunken: true }
@@ -40,7 +41,7 @@ BarWidget {
       anchors.left: parent.left
       width: parent.width
       text: root.title
-      color: root.bar ? root.bar.barForeground : Color.foreground
+      color: root.bar ? root.bar.barForeground : Commons.Color.foreground
       font.family: root.bar ? root.bar.fontFamily : Style.font.family
       font.pixelSize: Style.font.body
       elide: Text.ElideRight

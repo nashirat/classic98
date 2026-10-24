@@ -1,5 +1,6 @@
 import QtQuick
 import qs.Commons
+import qs.Commons as Commons
 
 Item {
   id: root
@@ -8,8 +9,8 @@ Item {
   property string text: ""
   property string fontFamily: bar ? bar.fontFamily : Style.font.family
   property real fontSize: Style.font.body
-  property color foreground: bar ? bar.barForeground : Color.foreground
-  property color activeColor: bar ? bar.urgent : Color.urgent
+  property color foreground: bar ? bar.barForeground : Commons.Color.foreground
+  property color activeColor: bar ? bar.urgent : Commons.Color.urgent
   property bool active: false
   property real horizontalMargin: 8.5
   property real verticalPadding: 6
@@ -32,7 +33,7 @@ Item {
   signal pressed(int button)
   signal wheelMoved(int delta)
 
-  readonly property bool classic98: Color.pick("classic98.enabled", "false") === "true"
+  readonly property bool classic98: Commons.Color.pick("classic98.enabled", "false") === "true"
   property bool sunken: false
   property bool shallow: false
   property bool clickPulse: false

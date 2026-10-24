@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell.Hyprland
 import qs.Commons
+import qs.Commons as Commons
 import qs.Ui
 
 BarWidget {
@@ -37,7 +38,7 @@ BarWidget {
 
   readonly property real trailingGap: root.vertical ? 0 : Style.spaceReal(1.5)
 
-  readonly property bool classic98: Color.pick("classic98.enabled", "false") === "true"
+  readonly property bool classic98: Commons.Color.pick("classic98.enabled", "false") === "true"
   readonly property real dividerSpace: classic98 && !root.vertical ? 13 : 0
 
   implicitWidth: grid.implicitWidth + trailingGap + 2 * dividerSpace

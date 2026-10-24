@@ -1,22 +1,22 @@
 import QtQuick
 import Quickshell
 import qs.Commons
+import qs.Commons as Commons
 import qs.Ui
 
 BarWidget {
   id: root
   moduleName: "omarchy.menu"
 
-  implicitWidth: button.implicitWidth + (Color.pick("classic98.enabled", "false") === "true" ? 13 : 0)
+  implicitWidth: button.implicitWidth + (Commons.Color.pick("classic98.enabled", "false") === "true" ? 13 : 0)
   implicitHeight: button.implicitHeight
 
   ClassicButton {
     id: button
     anchors.fill: parent
-    anchors.rightMargin: Color.pick("classic98.enabled", "false") === "true" ? 13 : 0
-    leadingIcon: "file://" + Quickshell.env("HOME") + "/.local/state/omarchy/current/theme/icons/windows-start.png"
+    anchors.rightMargin: Commons.Color.pick("classic98.enabled", "false") === "true" ? 13 : 0
     bar: root.bar
-    text: classic98 ? "Start" : "\ue900"
+    text: classic98 ? "Menu" : "\ue900"
     fontFamily: "omarchy"
     fontBold: classic98
     horizontalMargin: classic98 ? 14 : 7.5
@@ -27,7 +27,7 @@ BarWidget {
     }
   }
   Item {
-    visible: Color.pick("classic98.enabled", "false") === "true"
+    visible: Commons.Color.pick("classic98.enabled", "false") === "true"
     anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter
     anchors.rightMargin: 4
     width: 6; height: 22
